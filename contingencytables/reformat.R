@@ -1,6 +1,7 @@
 #' @title Package script
 #' @description Reformat script to fit package
 #' @param filename name of the file
+#' @param chap_num chapter number
 #' @param saveOutput if `TRUE`, original is printed and `filename` is overwritten. Defaults to `FALSE`, in which case reformatted file is printed
 #' @param tabIndent if `TRUE`, replaces spaced indentation with tabs
 #' @return text converted to R, printed to screen or replacing input file
@@ -8,7 +9,7 @@
 #' into a package format
 #' @author Waldir Leoncio
 #' @importFrom utils write.table
-reformat <- function(filename, saveOutput = FALSE, tabIndent = TRUE) {
+reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 
 	# ======================================================== #
 	# Verification                                             #
@@ -34,7 +35,13 @@ reformat <- function(filename, saveOutput = FALSE, tabIndent = TRUE) {
 	# Function documentation --------------------------------- #
 	fun_name <- gsub("(.+)\\s+=\\s+function\\(.+", "\\1", txt[1])
 	chap_line <- which(grepl(".+Chapter (\\d{1,2}) .+", txt))
-	chap_num <- sub(".+Chapter (\\d{1,2}) .+", "\\1", txt[chap_line])
+	if (missing(chap_num)) {
+		chap_num <- sub(".+Chapter (\\d{1,2}) .+", "\\1", txt[chap_line])
+		print(chap_num)
+	}
+	if (length(chap_num) == 0) {
+		stop("Chapter number not found. Please provide it manually.")
+	}
 	if (length(chap_line) > 0) {
 		for (cl in seq_len(chap_line) - 1) {
 			txt[chap_line - cl] <- gsub(
