@@ -38,7 +38,7 @@ echo -e "\n# Updated git log\n"
 git log --graph --pretty=format:'%C(yellow)%d%Creset %s %Cgreen(%cr)' -n 10
 echo -en "Push to remote [y/N]? "
 read push_yn
-if [ push_yn = 'y' ]
+if [ "$push_yn" = 'y' ]
 then
 	git push
 fi
