@@ -33,7 +33,14 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 	# ======================================================== #
 
 	# Function documentation --------------------------------- #
-	fun_name <- gsub("(.+)\\s+=\\s+function\\(.+", "\\1", txt[1])
+	fun_name <- NA
+	l <- 1
+	while (is.na(fun_name)) {
+		if (nchar(txt[l]) > 1 & substring(txt[l], 1, 1) != "#") {
+			fun_name <- gsub("(.+)\\s+=\\s+function\\(.+", "\\1", txt[l])
+		}
+		l <- l + 1
+	}
 	chap_line <- which(grepl(".+Chapter (\\d{1,2}) .+", txt))
 	if (missing(chap_num)) {
 		chap_num <- sub(".+Chapter (\\d{1,2}) .+", "\\1", txt[chap_line])
