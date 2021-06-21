@@ -87,7 +87,12 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 			txt
 		)
 	} else {
-		ex_line_1st <- which(grepl("if \\(missing\\(n\\)\\)", txt))
+		ex_line_1st <- which(
+			grepl(
+				pattern = "if \\(missing\\((n|a|direction)\\)\\)",
+				x = txt
+			)
+		)
 		ex_line_last <- which(grepl("}", txt))
 		ex_line_last <- ex_line_last[ex_line_last > ex_line_1st][1]
 		txt[ex_line_1st] <- paste0("#' @examples load_chapter(", chap_num, ")")
