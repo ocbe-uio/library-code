@@ -126,6 +126,7 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 	txt <- gsub("printresults=T)", "printresults=TRUE)", txt)
 	txt <- gsub("printresults=F)", "printresults=FALSE)", txt)
 	txt <- gsub("byrow=T)", "byrow=TRUE)", txt)
+	txt <- gsub("byrow=T,", "byrow=TRUE,", txt)
 	txt <- gsub("quote=F)", "quote=FALSE)", txt)
 	txt <- gsub("F = no, T = yes", "FALSE = no, TRUE = yes", txt)
 	txt <- gsub("(\\S)\\+(\\S)", "\\1 + \\2", txt)
