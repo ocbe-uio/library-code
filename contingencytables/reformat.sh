@@ -27,3 +27,11 @@ if [ $ch_num -eq 0 ]; then
 else
 	R -e "source('$SCRIPT_PATH/reformat.R'); reformat('$1', $ch_num, $rewrite)"
 fi
+
+# Post-formatting with styler ------------------------------------------------ #
+echo -en "Reformat with Styler (tidy up lines first, including example) [y/N]? "
+read reformat_styler
+if [ "$reformat_styler" = 'y' ]
+then
+	R -e "styler::style_file('$1')"
+fi
