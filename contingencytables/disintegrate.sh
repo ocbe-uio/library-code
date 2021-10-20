@@ -6,14 +6,14 @@ feature_branch=$(git branch --show-current)
 # Commiting changes
 echo -e "\n\e[0;34m# Pending changes\e[0m\n"
 git status
-echo -e "\n\e[0;34m# Some rethorical questions\e[0m\n"
-echo -en "\nWere the new functions added to chapters.R?"
+echo -e "\n\e[0;34m# Some rhetorical questions (plus a real one)\e[0m\n"
+echo -en "Were the new functions added to chapters.R?"
 read rethorical_question
 echo -en "Were unit tests written?"
 read rethorical_question
 echo -en "Has the package passed devtools::test()?"
 read rethorical_question
-echo -en "Proceed with commits [Y/n]?"
+echo -en "Proceed with commits [Y/n] ?"
 read proceed_yn
 if [ "$proceed_yn" = 'n' ]
 then

@@ -13,7 +13,7 @@ fi
 # Moving file to package                                   #
 # ======================================================== #
 
-echo 'Moving file from aux/ to R/'
+echo -e "\n\e[0;34m# Moving file from aux/ to R/\e[0m"
 path_filename=$1
 mv -v $path_filename R/
 
@@ -24,12 +24,12 @@ filename=$(echo $filename_ext | cut -d '.' -f 1)
 # Changing branch + initial commit                         #
 # ======================================================== #
 
-echo -e "\nCreating $filename branch"
+echo -e "\n\e[0;34m# Creating $filename branch\e[0m"
 git branch $filename
 
 git checkout $filename
 
-echo -e "\nCommitting original script"
+echo -e "\n\e[0;34m# Committing original script\e[0m"
 git add -A
 git commit -m "Added original script"
 
@@ -39,14 +39,14 @@ git commit -m "Added original script"
 
 echo $filename | xclip -selection clipboard
 echo $filename
-echo -e "\nFunction name copied to clipboard. Opening file in editor..."
+echo -e "\n\e[0;32m Function name copied to clipboard. Opening file in editor...\e[0m"
 xdg-open R/$filename_ext
 
 echo -en "Reformat script (take the chance to do a quick tidy-up of the file if you wish) [y/N]? "
 read reformat_yn
 if [ "$reformat_yn" = 'y' ]
 then
-	echo -e "\nReformatting. If this goes wrong, you can reformat the file manually with:"
+	echo -e "\n\e[0;34m# Reformatting\e[0m\nIf this goes wrong, you can reformat the file manually with:"
 	echo "reformat.sh R/$filename_ext"
 	reformat.sh R/$filename_ext
 else
