@@ -15,7 +15,7 @@ echo -en "Has the package passed devtools::test()?"
 read rethorical_question
 echo -en "Proceed with commits [Y/n]?"
 read proceed_yn
-if [ $proceed_yn = 'n' ]
+if [ "$proceed_yn" = 'n' ]
 then
 	echo "Exiting"
 	exit 0
@@ -38,7 +38,7 @@ git checkout develop
 echo -e "\n\e[0;34m# Merging $feature_branch into develop\e[0m\n"
 echo -en "Enter chapter number: "
 read chap_num
-git merge $feature_branch -m "Merged $feature_branch with develop (#$chap_num)"
+git merge $feature_branch -m "Merge $feature_branch into develop (#'$chap_num')"
 git branch --delete $feature_branch
 
 echo -e "\n\e[0;34m# Updated git log\e[0m\n"
