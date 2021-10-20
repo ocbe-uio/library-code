@@ -120,7 +120,7 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 		x = txt[-doc_lines]
 	)
 	txt <- gsub("\\s+#' (.+)", "#' \\1", txt)
-	# TODO: identify arguments from whats inside parenthesis after fun_name
+	# TODO: identify arguments from what's inside parenthesis after fun_name
 
 	# Function code, general ---------------------------------- #
 	txt <- gsub("printresults=T)", "printresults=TRUE)", txt)
@@ -142,8 +142,6 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 	txt <- gsub("^(\\s{4,})names\\((\\w+)\\)\\s=\\s", "\\1names(\\2) <- ", txt)
 	txt <- gsub("^(.+)\\s=\\sfunction", "\\1 <- function", txt)
 
-	# Indentation -------------------------------------------- #
-	if (tabIndent) txt <- tabIndent(txt)
 
 	# ======================================================== #
 	# Putting documentation first                              #
@@ -153,6 +151,9 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 	if (substr(txt[1], 1, 24) == "#' @description function") txt <- txt[-1]
 	txt <- c(txt[1], txt)
 	txt[1] <- gsub("description", "title", txt[1])
+
+	# Indentation -------------------------------------------- #
+	if (tabIndent) txt <- tabIndent(txt)
 
 	# ======================================================== #
 	# Making sure last line is empty                           #
@@ -182,6 +183,7 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 		)
 	}
 }
+
 # TODO: import diff functionality from rBAPS (extract as separate function 1st)
 replaceInExample <- function(x, lines, pattern, new) {
 	vapply(
@@ -190,6 +192,7 @@ replaceInExample <- function(x, lines, pattern, new) {
 		FUN.VALUE = character(1)
 	)
 }
+
 tabIndent <- function(txt) {
 	txt <- gsub("^\\s{27,28}", "\t\t\t\t\t\t\t", txt) # indentation level 7
 	txt <- gsub("^\\s{24}", "\t\t\t\t\t\t", txt) # indentation level 6
