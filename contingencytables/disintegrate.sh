@@ -48,4 +48,5 @@ read push_yn
 if [ "$push_yn" = 'y' ]
 then
 	git push
+	gh issue edit $chap_num
 fi
