@@ -170,6 +170,7 @@ reformat <- function(filename, chap_num, saveOutput = FALSE, tabIndent = TRUE) {
 		message("This is what the original file looked like:\n")
 		print(orig, quote=FALSE)
 		message("File overwritten. Please compare with original content above.")
+		message("Once the function is translated, chapter-tied and tested, Run disintegrate.sh to commit the results.")
 		return(
 			write.table(
 				x         = txt,

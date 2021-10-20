@@ -42,7 +42,7 @@ echo $filename
 echo -e "\nFunction name copied to clipboard. Opening file in editor..."
 xdg-open R/$filename_ext
 
-echo -en "Reformat script [y/N]? "
+echo -en "Reformat script (take the chance to do a quick tidy-up of the file if you wish) [y/N]? "
 read reformat_yn
 if [ "$reformat_yn" = 'y' ]
 then
@@ -50,6 +50,6 @@ then
 	echo "reformat.sh R/$filename_ext"
 	reformat.sh R/$filename_ext
 else
-	echo "Whenever you are ready, run the following to reformat the function:"
+	echo -e "\nWhenever you are ready, run the following to reformat the function:"
 	echo "reformat.sh R/$filename_ext"
 fi

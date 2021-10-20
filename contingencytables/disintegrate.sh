@@ -4,7 +4,7 @@
 feature_branch=$(git branch --show-current)
 
 # Commiting changes
-echo -e "# Pending changes"
+echo -e "\n\e[0;34m# Pending changes\e[0m\n"
 git status
 echo -e "Proceed with commits [Y/n]?"
 read proceed_yn
@@ -14,7 +14,7 @@ then
 	exit 0
 fi
 
-echo -e "# Commiting changes"
+echo -e "\n\e[0;34m# Commiting changes\e[0m\n"
 git add R/$feature_branch.R
 git commit -m "Reformatted function"
 git add R/chapters.R
@@ -24,19 +24,19 @@ git commit -m "Added unit tests"
 git add man/$feature_branch.Rd
 git commit -m "Updated docs"
 
-echo -e "# Branch switching\n"
+echo -e "\n\e[0;34m# Branch switching\e[0m\n"
 echo "On branch $feature_branch. Switching to develop"
 git checkout develop
 
-echo -e "\n# Merging $feature_branch into develop\n"
+echo -e "\n\e[0;34m# Merging $feature_branch into develop\e[0m\n"
 echo -en "Enter chapter number: "
 read chap_num
 git merge $feature_branch -m "Merged $feature_branch with develop (#$chap_num)"
 git branch --delete $feature_branch
 
-echo -e "\n# Updated git log\n"
+echo -e "\n\e[0;34m# Updated git log\e[0m\n"
 git log --graph --pretty=format:'%C(yellow)%d%Creset %s %Cgreen(%cr)' -n 10
-echo -en "Push to remote [y/N]? "
+echo -en "\nPush to remote and edit github issue [y/N]? "
 read push_yn
 if [ "$push_yn" = 'y' ]
 then
