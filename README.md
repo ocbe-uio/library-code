@@ -22,4 +22,4 @@ If you use this software, please use the metadata on the [CITATION.cff](https://
 
 # File organization
 
-Files that will probably work across projects are in the "general" folder. Files that were created and should probably only work within a particular project are in a folder with the project's name. Efforts to generalize the latter are very welcome.
+Files that will probably work across projects are in the "scripts" folder.
