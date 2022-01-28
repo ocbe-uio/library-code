@@ -13,7 +13,7 @@ echo -en "Were unit tests written?"
 read rethorical_question
 echo -en "Has the package passed devtools::test()?"
 read rethorical_question
-echo -en "Proceed with commits [Y/n] ?"
+echo -en "Proceed with commits [Y/n]?"
 read proceed_yn
 if [ "$proceed_yn" = 'n' ]
 then
@@ -38,12 +38,13 @@ git checkout develop
 echo -e "\n\e[0;34m# Merging $feature_branch into develop\e[0m\n"
 echo -en "Enter chapter number: "
 read chap_num
-git merge $feature_branch -m "Merge $feature_branch into develop (#'$chap_num')"
+git merge $feature_branch -m "Merge $feature_branch into develop (#$chap_num)"
 git branch --delete $feature_branch
 
 echo -e "\n\e[0;34m# Updated git log\e[0m\n"
 git log --graph --pretty=format:'%C(yellow)%d%Creset %s %Cgreen(%cr)' -n 10
-echo -en "\nPush to remote and edit github issue [y/N]? "
+echo -en "\nIf the tree above looks OK, you should push and edit GH issue now."
+echo -en "\nPush to remote and edit GitHub issue [y/N]? "
 read push_yn
 if [ "$push_yn" = 'y' ]
 then

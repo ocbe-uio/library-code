@@ -1,6 +1,6 @@
 # !/bin/bash
 
-SCRIPT_PATH=~/UiO/rse-tools/contingencytables
+SCRIPT_PATH=~/UiO/Projects/rse-tools/contingencytables
 
 rewrite=TRUE
 valid_chapter_number='^[0-9]+$'
@@ -29,7 +29,7 @@ else
 fi
 
 # Post-formatting with styler ------------------------------------------------ #
-echo -en "Reformat with Styler (tidy up lines first, including example) [y/N]? "
+echo -en "Reformat with Styler (fix all syntax errors first, including example) [y/N]? "
 read reformat_styler
 if [ "$reformat_styler" = 'y' ]
 then
