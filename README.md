@@ -4,6 +4,8 @@ This repository contains scripts to aid research software development.
 
 RSE stands for Research Software Engineer, but these tools are free to use by anyone who finds them potentially useful.
 
+According to the [Ten simple rules for quick and dirty scientific programming](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008549), "if you find yourself writing the same class in 2 different research projects, you can move the class into a library instead, and use the library in your projects". This is what this repository is about: hosting code that is often used on different projects (i.e., other repositories).
+
 # Motivation
 
 When developing research packages, a developer might write some functions and scripts to make development easier. Such auxiliary files are not to be part of the released package. They may, however, be repurposed for another project. Therefore, it makes sense to put these tools in one place (i.e., this repository).
