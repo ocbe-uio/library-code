@@ -3,15 +3,44 @@
 # This script quickly juxtaposes two images using imagemagick
 # Output is made out of 4 files, combining JPG and TIF output with vertical and horizontal juxtapositions.
 
-if [ -z $1 ] || [ -z $2 ]
-then
-  echo "Usage: combiningScript.sh [FILES]"
-  echo "Please provide at least two file names"
+# Functions
+
+SCRIPTNAME=$(basename $0)
+function usage() {
+  cat <<USAGE
+
+  # Usage
+    $SCRIPTNAME [-f FLAGS] INPUT
+
+  # Options
+    -f:  Add image settings (see man convert)
+USAGE
   exit 1
-fi
-convert $* +append out_horizontal.jpg
-convert $* +append out_horizontal.tif
-convert $* +append out_horizontal.pdf
-convert $* -append out_vertical.jpg
-convert $* -append out_vertical.tif
-convert $* -append out_vertical.pdf
+}
+
+# Parsing arguments
+while getopts 'hf:' OPTION
+do
+  case $OPTION in
+  h)
+    usage
+    ;;
+  f)
+    FLAGS=$OPTARG
+    ;;
+  ?)
+    usage
+    exit 1
+    ;;
+  esac
+done
+shift "$(($OPTIND -1))"
+
+# Conversion
+echo "Merging $*"
+convert $FLAGS $* +append out_horizontal.jpg
+convert $FLAGS $* +append out_horizontal.tif
+convert $FLAGS $* +append out_horizontal.pdf
+convert $FLAGS $* -append out_vertical.jpg
+convert $FLAGS $* -append out_vertical.tif
+convert $FLAGS $* -append out_vertical.pdf
