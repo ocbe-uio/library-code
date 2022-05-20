@@ -5,5 +5,7 @@
 
 convert $* +append out_horizontal.jpg
 convert $* +append out_horizontal.tif
+convert $* +append out_horizontal.pdf
 convert $* -append out_vertical.jpg
 convert $* -append out_vertical.tif
+convert $* -append out_vertical.pdf
