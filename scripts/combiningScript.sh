@@ -3,10 +3,11 @@
 # This script quickly juxtaposes two images using imagemagick
 # Output is made out of 4 files, combining JPG and TIF output with vertical and horizontal juxtapositions.
 
-# Functions
-
+# Constants
 SCRIPTNAME=$(basename $0)
-function usage() {
+
+# Functions
+function usage {
   cat <<USAGE
 
   # Usage
