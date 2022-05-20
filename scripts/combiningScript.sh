@@ -11,11 +11,12 @@ function usage {
   cat <<USAGE
 
   # Usage
-    $SCRIPTNAME [-f FLAGS] INPUT
+    $SCRIPTNAME [OPTIONS] INPUT
 
   # Options
     -f: Add image settings (see man convert)
     -d: Merge direction (horizontal or vertical; defaults to both)
+    -o: Provide custom output variable name
 USAGE
   exit 1
 }
@@ -23,20 +24,28 @@ USAGE
 function merge {
   if [[ $DIRECTION != "vertical" ]]
   then
-    convert $FLAGS $* +append out_horizontal.jpg
-    convert $FLAGS $* +append out_horizontal.tif
-    convert $FLAGS $* +append out_horizontal.pdf
+    if [[ $OUTNAME == "" ]]
+    then
+      OUTNAME=out_horizontal
+    fi
+    convert $FLAGS $* +append $OUTNAME.jpg
+    convert $FLAGS $* +append $OUTNAME.tif
+    convert $FLAGS $* +append $OUTNAME.pdf
   fi
   if [[ $DIRECTION != "horizontal" ]]
   then
-    convert $FLAGS $* -append out_vertical.jpg
-    convert $FLAGS $* -append out_vertical.tif
-    convert $FLAGS $* -append out_vertical.pdf
+    if [[ $OUTNAME == "" ]]
+    then
+      OUTNAME=out_vertical
+    fi
+    convert $FLAGS $* -append $OUTNAME.jpg
+    convert $FLAGS $* -append $OUTNAME.tif
+    convert $FLAGS $* -append $OUTNAME.pdf
   fi
 }
 
 # Parsing arguments
-while getopts 'hf:d:' OPTION
+while getopts 'hf:d:o:' OPTION
 do
   case $OPTION in
   h)
@@ -47,6 +56,9 @@ do
     ;;
   d)
     DIRECTION=$OPTARG
+    ;;
+  o)
+    OUTNAME=$OPTARG
     ;;
   ?)
     usage
