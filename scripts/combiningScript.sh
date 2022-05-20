@@ -13,13 +13,14 @@ function usage() {
     $SCRIPTNAME [-f FLAGS] INPUT
 
   # Options
-    -f:  Add image settings (see man convert)
+    -f: Add image settings (see man convert)
+    -d: Merge direction (horizontal or vertical; defaults to both)
 USAGE
   exit 1
 }
 
 # Parsing arguments
-while getopts 'hf:' OPTION
+while getopts 'hf:d:' OPTION
 do
   case $OPTION in
   h)
@@ -28,13 +29,16 @@ do
   f)
     FLAGS=$OPTARG
     ;;
+  d)
+    DIRECTION=$OPTARG
+    ;;
   ?)
     usage
     exit 1
     ;;
   esac
 done
-shift "$(($OPTIND -1))"
+shift "$(($OPTIND -1))" # so what remains are just the arguments (not options)
 
 # Validation
 INPUT=$*
@@ -47,9 +51,15 @@ fi
 
 # Conversion
 echo "Merging $*"
-convert $FLAGS $* +append out_horizontal.jpg
-convert $FLAGS $* +append out_horizontal.tif
-convert $FLAGS $* +append out_horizontal.pdf
-convert $FLAGS $* -append out_vertical.jpg
-convert $FLAGS $* -append out_vertical.tif
-convert $FLAGS $* -append out_vertical.pdf
+if [[ $DIRECTION != "vertical" ]]
+then
+  convert $FLAGS $* +append out_horizontal.jpg
+  convert $FLAGS $* +append out_horizontal.tif
+  convert $FLAGS $* +append out_horizontal.pdf
+fi
+if [[ $DIRECTION != "horizontal" ]]
+then
+  convert $FLAGS $* -append out_vertical.jpg
+  convert $FLAGS $* -append out_vertical.tif
+  convert $FLAGS $* -append out_vertical.pdf
+fi
