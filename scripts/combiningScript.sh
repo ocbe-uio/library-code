@@ -24,26 +24,26 @@ USAGE
 function merge {
   if [[ $DIRECTION != "vertical" ]]
   then
-    if [[ $OUTNAME == "" ]]
-    then
-      OUTNAME=out_horizontal
-    fi
+    setOUTNAME "out_horizontal"
     convert $FLAGS $* +append $OUTNAME.jpg
     convert $FLAGS $* +append $OUTNAME.tif
     convert $FLAGS $* +append $OUTNAME.pdf
   fi
   if [[ $DIRECTION != "horizontal" ]]
   then
-    if [[ $OUTNAME == "" ]]
-    then
-      OUTNAME=out_vertical
-    fi
+    setOUTNAME "out_vertical"
     convert $FLAGS $* -append $OUTNAME.jpg
     convert $FLAGS $* -append $OUTNAME.tif
     convert $FLAGS $* -append $OUTNAME.pdf
   fi
 }
 
+function setOUTNAME {
+  if [[ $OUTNAME == "" ]] || [[ $OUTNAME == "out_horizontal" ]]
+  then
+    OUTNAME=$1
+  fi
+}
 # Parsing arguments
 while getopts 'hf:d:o:' OPTION
 do
