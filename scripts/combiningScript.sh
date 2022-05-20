@@ -27,14 +27,14 @@ function merge {
     setOUTNAME "out_horizontal"
     convert $FLAGS $* +append $OUTNAME.jpg
     convert $FLAGS $* +append $OUTNAME.tif
-    convert $FLAGS $* +append $OUTNAME.pdf
+    convert $FLAGS $* +append +repage $OUTNAME.pdf
   fi
   if [[ $DIRECTION != "horizontal" ]]
   then
     setOUTNAME "out_vertical"
     convert $FLAGS $* -append $OUTNAME.jpg
     convert $FLAGS $* -append $OUTNAME.tif
-    convert $FLAGS $* -append $OUTNAME.pdf
+    convert $FLAGS $* -append +repage $OUTNAME.pdf
   fi
 }
 
