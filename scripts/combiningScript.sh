@@ -20,6 +20,21 @@ USAGE
   exit 1
 }
 
+function merge {
+  if [[ $DIRECTION != "vertical" ]]
+  then
+    convert $FLAGS $* +append out_horizontal.jpg
+    convert $FLAGS $* +append out_horizontal.tif
+    convert $FLAGS $* +append out_horizontal.pdf
+  fi
+  if [[ $DIRECTION != "horizontal" ]]
+  then
+    convert $FLAGS $* -append out_vertical.jpg
+    convert $FLAGS $* -append out_vertical.tif
+    convert $FLAGS $* -append out_vertical.pdf
+  fi
+}
+
 # Parsing arguments
 while getopts 'hf:d:' OPTION
 do
@@ -51,16 +66,4 @@ then
 fi
 
 # Conversion
-echo "Merging $*"
-if [[ $DIRECTION != "vertical" ]]
-then
-  convert $FLAGS $* +append out_horizontal.jpg
-  convert $FLAGS $* +append out_horizontal.tif
-  convert $FLAGS $* +append out_horizontal.pdf
-fi
-if [[ $DIRECTION != "horizontal" ]]
-then
-  convert $FLAGS $* -append out_vertical.jpg
-  convert $FLAGS $* -append out_vertical.tif
-  convert $FLAGS $* -append out_vertical.pdf
-fi
+merge $*
