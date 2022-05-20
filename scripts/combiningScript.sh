@@ -36,6 +36,15 @@ do
 done
 shift "$(($OPTIND -1))"
 
+# Validation
+INPUT=$*
+if [[ $INPUT == "" ]]
+then
+  echo -e "\e[31mError\e[0m: No input files provided"
+  echo "Run $SCRIPTNAME -h for usage"
+  exit 1
+fi
+
 # Conversion
 echo "Merging $*"
 convert $FLAGS $* +append out_horizontal.jpg
