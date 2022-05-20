@@ -9,11 +9,12 @@ SCRIPTNAME=$(basename $0)
 # Functions
 function usage {
   cat <<USAGE
-
   # Usage
+
     $SCRIPTNAME [OPTIONS] INPUT
 
   # Options
+
     -f: Add image settings (see man convert)
     -d: Merge direction (horizontal or vertical; defaults to both)
     -o: Provide custom output variable name
@@ -72,8 +73,7 @@ shift "$(($OPTIND -1))" # so what remains are just the arguments (not options)
 INPUT=$*
 if [[ $INPUT == "" ]]
 then
-  echo -e "\e[31mError\e[0m: No input files provided"
-  echo "Run $SCRIPTNAME -h for usage"
+  echo -e "\e[31mError\e[0m: No input files provided. Run $SCRIPTNAME -h for usage"
   exit 1
 fi
 
