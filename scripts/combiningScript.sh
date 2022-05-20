@@ -78,4 +78,4 @@ then
 fi
 
 # Conversion
-merge $*
+merge $INPUT
