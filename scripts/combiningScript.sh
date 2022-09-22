@@ -28,14 +28,14 @@ function merge {
     setOUTNAME "out_horizontal"
     convert $FLAGS $* +append $OUTNAME.jpg
     convert $FLAGS $* +append $OUTNAME.tif
-    convert $FLAGS $* +append +repage $OUTNAME.pdf
+    convert $FLAGS -density 450 $* +append +repage -quality 100 $OUTNAME.pdf
   fi
   if [[ $DIRECTION != "horizontal" ]]
   then
     setOUTNAME "out_vertical"
     convert $FLAGS $* -append $OUTNAME.jpg
     convert $FLAGS $* -append $OUTNAME.tif
-    convert $FLAGS $* -append +repage $OUTNAME.pdf
+    convert $FLAGS -density 450 $* -append +repage -quality 100 $OUTNAME.pdf
   fi
 }
 
@@ -45,6 +45,7 @@ function setOUTNAME {
     OUTNAME=$1
   fi
 }
+
 # Parsing arguments
 while getopts 'hf:d:o:' OPTION
 do
